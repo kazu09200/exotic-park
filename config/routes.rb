@@ -13,6 +13,10 @@ Rails.application.routes.draw do
     confirmations: "users/confirmations"
   }
   
+  devise_scope :user do
+    post 'users/guest_sign_in', to: 'users/sessions#guest_sign_in'
+  end
+  
   root to: 'homes#top'
   get 'about' => 'homes#about'
   
@@ -28,7 +32,7 @@ Rails.application.routes.draw do
     resources :users, only: [:index, :show, :edit, :update] 
     resources :post_comments, only: [:create, :destroy]
     resources :favorites, only: [:create, :destroy]
-    resources :pets, only: [:index, :show, :edit, :update, :destroy] 
+    resources :pets, only: [:new, :index, :show, :edit, :create, :update, :destroy] 
     resources :posts, only: [:new, :create, :index, :show, :edit, :update, :destroy]
   end
   
